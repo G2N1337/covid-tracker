@@ -2,15 +2,11 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
 const InnerBox = styled.div`
-	background-color: #366;
+	background-color: #344;
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	border-radius: 25px 25px 0px 0px;
-	h1 {
-		text-align: center;
-	}
 `;
 const Box = styled.div`
 	-webkit-box-shadow: 10px 10px 41px 6px rgba(0, 0, 0, 0.32);
@@ -26,27 +22,16 @@ const Box = styled.div`
 	flex-direction: column;
 	border-radius: 25px;
 	transition: 0.2s ease;
-
 	:hover {
 		transform: scale(1.03);
 	}
 `;
-const Button = styled.button`
-	border: none;
-	color: #fff;
-	margin: 1em;
-	padding: 0.6rem 1.5rem;
-	font-size: 1.2rem;
-	border-radius: 1.3rem;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-	cursor: pointer;
-	background-color: #000;
-	transition: 0.2s ease;
-	&:hover {
-		background-color: #111;
-	}
+const CenterDiv = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
-export default function CardBox({ name, slug }) {
+export default function CardBox({ name, data }) {
 	const router = useRouter();
 
 	return (
@@ -54,7 +39,9 @@ export default function CardBox({ name, slug }) {
 			<InnerBox>
 				<h1>{name}</h1>
 			</InnerBox>
-			<Button onClick={() => router.push(`/${slug}`)}>More Info</Button>
+			<CenterDiv>
+				<p style={{ fontSize: '4rem' }}>{data}</p>
+			</CenterDiv>
 		</Box>
 	);
 }
