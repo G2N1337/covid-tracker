@@ -14,11 +14,25 @@ const BoxWrapper = styled.div`
 	align-items: center;
 `;
 const Paragraph = styled.p`
-	font-size: 36px;
+	font-size: 1em;
 `;
 const BannerRow = styled.div`
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-gap: 3px;
+	grid-auto-flow: column;
+	grid-template-columns: 1fr;
+	background-color: #fff;
+	border-radius: 2em;
+	color: black;
+	margin-bottom: 2em;
+	@media screen and (max-width: 1170px) {
+		grid-auto-flow: row;
+		grid-template-columns: 1fr 1fr;
+	}
+	@media screen and (max-width: 480px) {
+		grid-auto-flow: row;
+		grid-template-columns: 1fr;
+	}
 `;
 const MainBanner = styled.div`
 	height: 450px;
@@ -31,12 +45,13 @@ const MainBanner = styled.div`
 	-webkit-box-shadow: 10px 10px 41px 6px rgba(0, 0, 0, 0.32);
 	-moz-box-shadow: 10px 10px 41px 6px rgba(0, 0, 0, 0.32);
 	box-shadow: 10px 10px 41px 6px rgba(0, 0, 0, 0.32);
+	height: fit-content;
 `;
 
 const InputStyle = styled.input`
 	width: 275px;
 	height: 50px;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.3);
 	border-radius: 1.3rem;
 	padding: 0.6rem 1.5rem;
 	margin: 2em;
@@ -52,7 +67,8 @@ const MegaDiv = styled.div`
 `;
 const Switch = styled.div`
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 `;
 export default function MainPage({ data }) {
 	const [search, setSearch] = useState('');
@@ -60,8 +76,7 @@ export default function MainPage({ data }) {
 	return (
 		<MainPageStyles>
 			<MainBanner>
-				<h1 style={{ fontSize: '5rem' }}>COVID TRACKER</h1>
-
+				<h1 style={{ fontSize: '2rem' }}>COVID TRACKER</h1>
 				<BannerRow>
 					<>
 						<MegaDiv>
@@ -92,13 +107,15 @@ export default function MainPage({ data }) {
 						</MegaDiv>
 					</>
 				</BannerRow>
+			</MainBanner>
+			<Switch>
 				<InputStyle
 					type='text'
 					value={search}
 					onChange={(e) => setSearch(e.target.value.toLowerCase())}
 					placeholder='type in to search through all countries'
 				></InputStyle>
-			</MainBanner>
+			</Switch>
 
 			<BoxWrapper>
 				{data.Countries.filter(
