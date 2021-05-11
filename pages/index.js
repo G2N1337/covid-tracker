@@ -14,7 +14,7 @@ const BoxWrapper = styled.div`
 	align-items: center;
 `;
 const Paragraph = styled.p`
-	font-size: 1em;
+	font-size: 2em;
 `;
 const BannerRow = styled.div`
 	display: grid;
@@ -25,6 +25,8 @@ const BannerRow = styled.div`
 	border-radius: 2em;
 	color: black;
 	margin-bottom: 2em;
+	box-shadow: 10px 10px 41px 6px rgba(0, 0, 0, 0.1);
+
 	@media screen and (max-width: 1170px) {
 		grid-auto-flow: row;
 		grid-template-columns: 1fr 1fr;
@@ -32,6 +34,8 @@ const BannerRow = styled.div`
 	@media screen and (max-width: 480px) {
 		grid-auto-flow: row;
 		grid-template-columns: 1fr;
+		background-color: #223;
+		color: white;
 	}
 `;
 const MainBanner = styled.div`
@@ -64,6 +68,10 @@ const MegaDiv = styled.div`
 	padding-left: 30px;
 	align-items: center;
 	justify-content: center;
+	margin: 1.5em;
+	h2 {
+		border-bottom: 2px solid;
+	}
 `;
 const Switch = styled.div`
 	display: flex;
@@ -76,34 +84,38 @@ export default function MainPage({ data }) {
 	return (
 		<MainPageStyles>
 			<MainBanner>
-				<h1 style={{ fontSize: '2rem' }}>COVID TRACKER</h1>
+				<h1 style={{ fontSize: '2rem', margin: '2em' }}>COVID TRACKER</h1>
 				<BannerRow>
 					<>
 						<MegaDiv>
 							<h2>Today's Cases</h2>
-							<Paragraph>{data.Global.NewConfirmed}</Paragraph>
+							<Paragraph>{data.Global.NewConfirmed.toLocaleString()}</Paragraph>
 						</MegaDiv>
 						<MegaDiv>
 							<h2>Today's Deaths</h2>
-							<Paragraph>{data.Global.NewDeaths}</Paragraph>
+							<Paragraph>{data.Global.NewDeaths.toLocaleString()}</Paragraph>
 						</MegaDiv>
 						<MegaDiv>
 							<h2>Today's Recovered</h2>
-							<Paragraph>{data.Global.NewRecovered}</Paragraph>
+							<Paragraph>{data.Global.NewRecovered.toLocaleString()}</Paragraph>
 						</MegaDiv>
 					</>
 					<>
 						<MegaDiv>
 							<h2>Total Cases</h2>
-							<Paragraph>{data.Global.TotalConfirmed}</Paragraph>
+							<Paragraph>
+								{data.Global.TotalConfirmed.toLocaleString()}
+							</Paragraph>
 						</MegaDiv>
 						<MegaDiv>
 							<h2>Total Deaths</h2>
-							<Paragraph>{data.Global.TotalDeaths}</Paragraph>
+							<Paragraph>{data.Global.TotalDeaths.toLocaleString()}</Paragraph>
 						</MegaDiv>
 						<MegaDiv>
 							<h2>Totals Recovered</h2>
-							<Paragraph>{data.Global.TotalRecovered}</Paragraph>
+							<Paragraph>
+								{data.Global.TotalRecovered.toLocaleString()}
+							</Paragraph>
 						</MegaDiv>
 					</>
 				</BannerRow>
@@ -123,7 +135,7 @@ export default function MainPage({ data }) {
 						item.Country.toLowerCase().includes(search) ||
 						item.CountryCode.toLowerCase().includes(search)
 				).map((item) => (
-					<CardBox name={item.Country} slug={item.Slug}></CardBox>
+					<CardBox key={item.Id} name={item.Country} slug={item.Slug}></CardBox>
 				))}
 			</BoxWrapper>
 		</MainPageStyles>
