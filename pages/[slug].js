@@ -28,6 +28,7 @@ const AText = styled.div`
 	background-color: #223;
 	width: 100%;
 	color: white;
+	cursor: pointer;
 `;
 export default function SlugPage({ data }) {
 	const router = useRouter();
@@ -37,11 +38,13 @@ export default function SlugPage({ data }) {
 
 	return (
 		<div>
-			<Link href='/'>
-				<AText style={{ backgroundColor: '#223' }}>Go Back</AText>
-			</Link>
 			<MainBanner>
-				<h1>Info about {short.Country}</h1>
+				<Link href='/'>
+					<AText style={{ backgroundColor: '#223' }}>
+						<i className='fas fa-arrow-left' style={{ fontSize: '3.5rem' }} />
+					</AText>
+				</Link>
+				<h1 style={{ fontSize: '3.5rem' }}>Info about {short.Country}</h1>
 			</MainBanner>{' '}
 			<BoxWrapper>
 				<CardInfo name={'Total Deaths'} data={short.TotalDeaths}></CardInfo>
