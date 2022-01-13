@@ -142,7 +142,7 @@ export default function MainPage({ data }) {
 	);
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const res = await fetch('https://api.covid19api.com/summary');
 	const data = await res.json();
 	return {
